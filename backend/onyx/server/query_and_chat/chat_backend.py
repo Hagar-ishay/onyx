@@ -23,6 +23,7 @@ from sqlalchemy.orm import Session
 
 from onyx.auth.users import current_chat_accessible_user
 from onyx.auth.users import current_user
+from onyx.auth.users import is_user_admin
 from onyx.chat.chat_utils import create_chat_chain
 from onyx.chat.chat_utils import extract_headers
 from onyx.chat.process_message import stream_chat_message
@@ -207,6 +208,8 @@ def get_chat_session(
     db_session: Session = Depends(get_session),
 ) -> ChatSessionDetailResponse:
     user_id = user.id if user is not None else None
+    if is_user_admin(user):
+        user_id = None
     try:
         chat_session = get_chat_session_by_id(
             chat_session_id=session_id,
