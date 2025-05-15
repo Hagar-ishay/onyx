@@ -239,6 +239,7 @@ def construct_tools(
                     dynamic_schema_info=DynamicSchemaInfo(
                         chat_session_id=custom_tool_config.chat_session_id,
                         message_id=custom_tool_config.message_id,
+                        user_id=user.id if user else None,
                     ),
                     custom_headers=(db_tool_model.custom_headers or [])
                     + (

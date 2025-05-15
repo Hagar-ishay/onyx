@@ -3,16 +3,13 @@ from datetime import datetime
 from typing import Any
 from uuid import UUID
 
-from pydantic import BaseModel
-from pydantic import model_validator
-from sqlalchemy.orm import Session
-
 from onyx.configs.constants import DocumentSource
 from onyx.context.search.enums import SearchType
-from onyx.context.search.models import IndexFilters
-from onyx.context.search.models import InferenceSection
-from onyx.context.search.models import QueryExpansions
+from onyx.context.search.models import (IndexFilters, InferenceSection,
+                                        QueryExpansions)
+from pydantic import BaseModel, model_validator
 from shared_configs.model_server_models import Embedding
+from sqlalchemy.orm import Session
 
 
 class ToolResponse(BaseModel):
@@ -56,7 +53,7 @@ class ToolCallFinalResult(ToolCallKickoff):
 class DynamicSchemaInfo(BaseModel):
     chat_session_id: UUID | None
     message_id: int | None
-
+    user_id: UUID | None
 
 class SearchQueryInfo(BaseModel):
     predicted_search: SearchType | None
@@ -88,3 +85,4 @@ class SearchToolOverrideKwargs(BaseModel):
 
 CHAT_SESSION_ID_PLACEHOLDER = "CHAT_SESSION_ID"
 MESSAGE_ID_PLACEHOLDER = "MESSAGE_ID"
+USER_ID_PLACEHOLDER = "USER_ID"

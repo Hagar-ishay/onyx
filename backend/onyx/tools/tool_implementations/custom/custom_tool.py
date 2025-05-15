@@ -26,6 +26,7 @@ from onyx.llm.models import PreviousMessage
 from onyx.tools.base_tool import BaseTool
 from onyx.tools.message import ToolCallSummary
 from onyx.tools.models import CHAT_SESSION_ID_PLACEHOLDER
+from onyx.tools.models import USER_ID_PLACEHOLDER
 from onyx.tools.models import DynamicSchemaInfo
 from onyx.tools.models import MESSAGE_ID_PLACEHOLDER
 from onyx.tools.models import ToolResponse
@@ -375,6 +376,7 @@ def build_custom_tools_from_openapi_schema_and_headers(
         placeholders = {
             CHAT_SESSION_ID_PLACEHOLDER: dynamic_schema_info.chat_session_id,
             MESSAGE_ID_PLACEHOLDER: dynamic_schema_info.message_id,
+            USER_ID_PLACEHOLDER: dynamic_schema_info.user_id,
         }
 
         for placeholder, value in placeholders.items():
